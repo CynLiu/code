@@ -1,0 +1,54 @@
+#include<stdio.h>
+void main()
+{
+int m,n,t;
+int i,j,k,num[101]={0};
+char a[101][51],b;
+scanf("%d%d",&m,&n);
+  for(i=0;i<n;i++)
+  {
+   fflush(stdin);
+   for(j=0;j<m;j++)
+   {
+   scanf("%c",&a[i][j]);
+   }
+   }
+for(i=0;i<n;i++)
+{
+for(j=0;j<m-1;j++)
+{
+for(k=j+1;k<m;k++)
+{
+if(a[i][j]>a[i][k])
+num[i]++;
+}
+}
+}
+for(i=0;i<n-1;i++)
+{
+for(j=i+1;j<n;j++)
+{
+if(num[i]>num[j])
+{
+for(k=0;k<m;k++)
+{
+b=a[i][k];
+a[i][k]=a[j][k];
+a[j][k]=b;
+}
+t=num[i];
+num[i]=num[j];
+num[j]=t;
+}
+}
+}
+printf("\n");
+for(i=0;i<n;i++)
+{
+for(j=0;j<m;j++)
+{
+printf("%c",a[i][j]);
+}
+printf("\n");
+} 
+}
