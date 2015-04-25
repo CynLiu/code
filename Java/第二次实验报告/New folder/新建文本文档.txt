@@ -1,0 +1,144 @@
+package findlargestblock;
+
+import java.util.Scanner;
+
+public class FindLargestBlock {
+    static int n;//static
+    
+    public static int[] findLargestBlock(int[][] m){
+        int [][] dp = new int [11][11];
+        int [] data = new int [3];
+        int i,j,min,maxn,x,y;
+        for(i=0;i<n;i++){
+            for(j=0;j<n;j++){
+                dp[i][j]=0;
+        }
+        }
+        
+        maxn=0;
+        x=y=1;
+        for(i=1;i<=n;i++){
+            for(j=1;j<=n;j++){
+                if(m[i][j]==1){
+                    if(i==0&&j==0){
+                        dp[i][j]=1;
+                        continue;
+                    }
+                    min=n;
+                   
+                    if(i-1>=0&&dp[i-1][j]<min) min=dp[i-1][j];
+                    if(j-1>=0&&dp[i][j-1]<min) min=dp[i][j-1];
+                    if(i-1>=0&&j-1>=0&&dp[i-1][j-1]<min) min=dp[i-1][j-1];
+                    if(min+1>maxn) {
+                        maxn=min+1;
+                        x=i;
+                        y=j;
+                    }
+                    dp[i][j]=min+1;
+                }
+                else dp[i][j]=0;
+                }
+                    
+        }
+        data[0]=x-maxn;
+        data[1]=y-maxn;
+        data[2]=maxn;
+        return data;
+    }
+            
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);//i have missed
+        int [][] matrix = new int [11][11];
+        int [] data;
+        int i,j;
+        n=input.nextInt();
+        System.out.print("Please input the n*n number:\n");
+        
+        for(i=0;i<n;i++){
+            for(j=0;j<n;j++){
+                matrix[i][j]=0;
+        }
+        }
+        
+        for (int row = 1; row <= n; row++) {
+for (int column = 1; column <= n; column++) {
+matrix[row][column] = input.nextInt(); }
+}
+        data=findLargestBlock(matrix);
+        for(i=0;i<3;i++)
+            System.out.println(data[i]); 
+    }
+    
+}
+
+
+
+
+package linearequation;
+
+import java.util.Scanner;
+
+public class LinearEquation {
+    private static double a,b,c,d,e,f;
+    /**
+     * @param args the command line arguments
+     */
+    LinearEquation(double a,double b,double c,double d,double e,double f){
+    this.a=a;
+    this.b=b;
+    this.c=c;
+    this.d=d;
+    this.e=e;
+    this.f=f;
+}
+    static double getA(){
+        return a;
+    }
+    static double getB(){
+        return b;
+    }
+    static double getC(){
+        return c;
+    }
+    static double getD(){
+        return d;
+    }
+    static double getE(){
+        return e;
+    }
+    static double getF(){
+        return f;
+    }
+    
+    static boolean isSolvable(){//
+        if(a*d-b*c==0) return false;
+        else return true;
+    }
+    
+    static double getX(){
+        double x=(e*d-b*f)/(a*d-b*c);
+        return x;
+    }
+    static double getY(){
+        double y=(a*f-e*c)/(a*d-b*c);
+        return y;
+    }
+    
+    public static void main(String[] args) {
+        double x,y;
+        System.out.println("please input a,b,c,d,e,f");
+        Scanner input = new Scanner(System.in);
+        double a = input.nextDouble();
+        double b = input.nextDouble();
+        double c = input.nextDouble();
+        double d = input.nextDouble();
+        double e = input.nextDouble();
+        double f = input.nextDouble();
+        LinearEquation LE1 = new LinearEquation(a,b,c,d,e,f);
+        if(isSolvable()==true){
+        System.out.println("x is " + LinearEquation.getX() + " y is " + LinearEquation.getY());
+    }
+        else System.out.println("no roots");
+    
+}
+}
